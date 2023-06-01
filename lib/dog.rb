@@ -41,7 +41,7 @@ class Dog
     end
 
     def self.all
-        sql = "SE;ECT * FROM dogs"
+        sql = "SELECT * FROM dogs"
         DB[:conn].execute(sql).map do | row | 
             new_from_db(row)
         end
