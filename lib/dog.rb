@@ -40,6 +40,27 @@ class Dog
         Dog.new(id: id, name: name, breed: breed)
     end
 
+    def self.all
+        sql = "SE;ECT * FROM dogs"
+        DB[:conn].execute(sql).map do | row | 
+            new_from_db(row)
+        end
+    end
+
+    def self.find_by_name(name)
+        sql = "SELECT * FROM dogs WHERE name = ? LIMIT 1"
+        row = DB[:conn].execute(sql, name).first
+        new_from_db(row) if row
+    end
+
+    def self.find(id)
+        sql = "SELECT * FROM dogs WHERE id = ? LIMIT 1"
+        row = DB[:conn].execute(sql, id).first
+        new_from_db(row) if row
+    end
+
+
+
 
 
 end
